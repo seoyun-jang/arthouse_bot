@@ -26,7 +26,7 @@ from telegram.ext import Updater, CommandHandler
 
 bot = telegram.Bot(token ='token')
 
-# https://api.telegram.org/bot5027753346:AAEIKBEv-DrekFl7QXdgR6--RhJ4gEBd-mE/getUpdates
+# https://api.telegram.org/bot'chat_id':'token'/getUpdates
 chat_id = 'chat_id'
 
 url = "http://www.cgv.co.kr/common/showtimes/iframeTheater.aspx?theatercode=0105&date=20220121&screencodes=&screenratingcode=16"
