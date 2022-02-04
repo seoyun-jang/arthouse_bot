@@ -2,7 +2,7 @@
 """
 Created on Fri Jan 28 2022 - Tue Feb 03 2022
 
-@author: seoyu
+@author: seoyun
 
 @memo: 메세지 내용 수정을 위한 코드 수정
 """
@@ -26,11 +26,12 @@ import time
 import telegram
 from telegram.ext import Updater, CommandHandler
 
-bot = telegram.Bot(token ='5027753346:AAEIKBEv-DrekFl7QXdgR6--RhJ4gEBd-mE')
+bot = telegram.Bot(token ='token')
 
-# https://api.telegram.org/bot5027753346:AAEIKBEv-DrekFl7QXdgR6--RhJ4gEBd-mE/getUpdates
-chat_id = '5043724522'
+# https://api.telegram.org/bot'chat_id':'token'/getUpdates
+chat_id = 'chat_id'
 
+# 모든 일정에 대한 반복을 위해 url에 극장코드, 날짜, 작품코드를 입력받을 수 있게 함
 theatercode = '0105'
 date = '20220204'
 screenratingcode = '16'
@@ -44,15 +45,16 @@ res.raise_for_status()
 soup = BeautifulSoup(res.text, "html.parser")
 
 movies = soup.select("div.col-times")
+
+# {영화제목 : 극장정보} 형식의 딕셔너리 생성
 movie_dict = {}
-title_list = []
 
 if movies:
-    # 영화제목
+    # 영화제목 리스트
     title_list = [movie.parent.select("div.info-movie > a > strong")[0].text.strip() for movie in movies]
-    #bot.sendMessage(chat_id=chat_id, text = title)
+    #print(title_list)
 
-    # 상영
+    # 극장정보 가져오기
     for movie in movies:
         informations = movie.find("div", attrs = {"class":"info-timetable"}).find_all('a')
         for info in informations:
